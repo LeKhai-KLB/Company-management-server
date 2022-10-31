@@ -1,18 +1,5 @@
-import { InputType, Field } from "@nestjs/graphql";
-import { IsEmail, Matches } from "class-validator";
-import { usernameRegex, passwordRegex } from "~/utils/regex";
+import { InputType } from "@nestjs/graphql";
+import { CreateUserDto } from "~features/user/dto/create-user.dto";
 
 @InputType()
-export class RegisterInput {
-  @Field()
-  @IsEmail()
-  email: string;
-
-  @Field()
-  @Matches(usernameRegex)
-  username: string;
-
-  @Field()
-  @Matches(passwordRegex)
-  password: string;
-}
+export class RegisterInput extends CreateUserDto {}

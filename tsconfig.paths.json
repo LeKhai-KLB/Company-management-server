@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "paths": {
+      "~/*": ["src/*"],
+      "~features/*": ["src/features/*"],
+      "~utils/*": ["src/utils/*"],
+      "~constants/*": ["src/constants/*"],
+      "~share/*": ["src/share/*"],
+      "~app-configs/*": ["src/app-configs/*"],
+      "~routes/*": ["src/routes/*"],
+      "~exception-filter/*": ["src/exception-filter/*"]
+    }
+  }
+}
