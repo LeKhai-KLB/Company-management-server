@@ -1,4 +1,5 @@
 {
+  "extends": "./tsconfig.paths.json",
   "compilerOptions": {
     "module": "commonjs",
     "declaration": true,
@@ -9,6 +10,8 @@
     "target": "es2017",
     "sourceMap": true,
     "outDir": "./dist",
+    "allowJs": true,
+    "strict": false,
     "baseUrl": "./",
     "incremental": true,
     "skipLibCheck": true,
@@ -16,12 +19,6 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false,
-    "paths": {
-      "~/*": ["src/*"],
-      "~features/*": ["src/features/*"],
-      "~utils/*": ["src/utils/*"],
-      "~constants/*": ["src/constants/*"]
-    }
+    "noFallthroughCasesInSwitch": false
   }
 }

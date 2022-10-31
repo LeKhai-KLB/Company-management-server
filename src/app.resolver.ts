@@ -1,22 +1,21 @@
-import { Resolver, Query, GqlExecutionContext } from "@nestjs/graphql";
-import { createParamDecorator, ExecutionContext } from "@nestjs/common";
-
-const GetRespone = createParamDecorator((_, ctx: ExecutionContext) => {
-  return GqlExecutionContext.create(ctx).getContext().res;
-});
-
-const GetRequest = createParamDecorator((_, ctx: ExecutionContext) => {
-  return GqlExecutionContext.create(ctx).getContext().req;
-});
+import { Resolver, Query } from "@nestjs/graphql";
+import { Req } from "~share/decorators/Req.decorator";
+import { Res } from "~share/decorators/Res.decorator";
+import { Request, Response } from "express";
 
 @Resolver()
 export class FooResolver {
   @Query(() => String)
-  sayHello(@GetRespone() res: any) {
+  setId(@Res() res: Response) {
     res.cookie("id", "1", {
       httpOnly: true,
       secure: true,
     });
     return "Hello world!";
+  }
+
+  @Query(() => String)
+  getId(@Req() req: Request) {
+    return req.cookies["id"];
   }
 }
