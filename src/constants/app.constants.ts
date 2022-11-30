@@ -34,9 +34,9 @@ export enum CONFIG_KEY {
 }
 
 export enum GROUP_ROLE {
-  IS_ADMIN = "IS_ADMIN",
+  ADMIN = "ADMIN",
   MEMBER = "MEMBER",
-  GUEST = "GUEST",
+  PENDING = "PENDING",
 }
 
 export enum ROOM_ROLE {
@@ -48,5 +48,5 @@ export enum ROOM_ROLE {
 export enum TASK_TAG {
   TODO = "TODO",
   DOING = "DOING",
-  FULFILLMENT = "FULFILLMENT",
+  DONE = "DONE",
 }

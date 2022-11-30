@@ -43,9 +43,14 @@ export class AuthResolver {
     return this.authService.checkCurrentSession(req, res);
   }
 
+  @Mutation(() => Boolean)
+  @UseGuards(GqlAuthGuard)
+  deleteUser(@Req() req: Request, @Res() res: Response) {
+    return this.authService.deleteUser(req, res);
+  }
+
   @Query(() => String)
   @UseGuards(GqlAuthGuard)
-  @Query(() => String)
   testAuthGuard() {
     return this.authService.testAuthGuard();
   }
