@@ -23,7 +23,7 @@ export class User extends BaseEntity {
 
   @Column({ type: "text", length: 30, default: "unknown" })
   @MaxLength(30)
-  username: string;
+  username!: string;
 
   @Column()
   password: string;
