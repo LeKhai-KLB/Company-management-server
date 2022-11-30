@@ -12,6 +12,7 @@ export const GraphQLConfigModule =
         configService.get(CONFIG_KEY.CLIENT_ORIGIN) || true;
       return {
         autoSchemaFile: true,
+        cache: "bounded",
         cors: {
           origin: CLIENT_ORIGIN,
           credentials: true,
