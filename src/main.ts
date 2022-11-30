@@ -17,7 +17,7 @@ async function bootstrap() {
   const stage = process.env.STAGE;
 
   app.enableCors({
-    origin: CLIENT_ORIGIN,
+    origin: true,
     credentials: true,
   });
   app.useGlobalFilters(app.get(UnauthorizedExceptionFilter));
