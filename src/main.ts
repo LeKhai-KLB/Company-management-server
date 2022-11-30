@@ -16,10 +16,7 @@ async function bootstrap() {
   const APP_SECRET_KEY = configService.get(CONFIG_KEY.APP_SECRET_KEY);
   const stage = process.env.STAGE;
 
-  app.enableCors({
-    origin: true,
-    credentials: true,
-  });
+  app.enableCors();
   app.useGlobalFilters(app.get(UnauthorizedExceptionFilter));
   app.useGlobalPipes(
     new ValidationPipe({
