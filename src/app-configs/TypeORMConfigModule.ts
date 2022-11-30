@@ -24,7 +24,7 @@ const dynamicTypeORMConfig = (configService: ConfigService) => {
         password: configService.get(CONFIG_KEY.POSTGRES_PASSWORD),
         database: configService.get(CONFIG_KEY.POSTGRES_DATABASE),
         autoLoadEntities: true,
-        synchronize: false,
+        synchronize: true,
       };
     case ENVIRONMENT.STAGING:
       const dbURL = new URL(configService.get(CONFIG_KEY.COCKROACHDB_URL));
