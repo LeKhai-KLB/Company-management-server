@@ -20,6 +20,6 @@ export class CreateUserDto {
   })
   password: string;
 
-  // @Field((type) => String, { nullable: true })
-  // avatar: string;
+  @Field(() => String, { nullable: true })
+  avatar?: string;
 }

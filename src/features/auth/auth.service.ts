@@ -9,6 +9,7 @@ import { ConfigService } from "@nestjs/config";
 import type { Request, Response } from "~/share/types";
 import { RedisService } from "~features/redis/redis.service";
 import { CONFIG_KEY, COOKIES_KEY } from "~/constants/app.constants";
+import { deleteFile } from "~/utils/firebase/firebase.service";
 
 @Injectable()
 export class AuthService {
@@ -46,9 +47,11 @@ export class AuthService {
     req: Request,
     res: Response,
     user_id: number,
+    group_id?: string,
   ): Promise<void> {
     const newAccessToken = this.setupJWTWithCookies(res);
     req.session.user_id = user_id;
+    if (group_id) req.session.default_group = group_id;
     req.session.expired_skip_time = 0;
     const expiredSeconds = this.configService.get(
       CONFIG_KEY.JWT_ACCESS_TOKEN_EXPIRE_SEC,
@@ -62,7 +65,7 @@ export class AuthService {
     loginInput: LoginInput,
     req: Request,
     res: Response,
-  ): Promise<Omit<User, "id">> {
+  ): Promise<User> {
     const { email, password } = loginInput;
     const user = (await this.userService.getUsersByFilters(
       { email: email },
@@ -116,6 +119,7 @@ export class AuthService {
   async restartSession(req: Request, res: Response): Promise<User> {
     const expiredSkipTime = req.session.expired_skip_time;
     const user_id = req.session.user_id;
+    const group_id = req.session.default_group;
     const user = (await this.userService.getUsersByFilters(
       { id: user_id },
       {
@@ -125,7 +129,7 @@ export class AuthService {
     if (Date.now() > expiredSkipTime || !user) {
       throw new UnauthorizedException();
     }
-    await this.createNewSession(req, res, user_id);
+    await this.createNewSession(req, res, user_id, group_id);
     return user;
   }
 
@@ -153,6 +157,16 @@ export class AuthService {
   async logout(req: Request, res: Response): Promise<boolean> {
     await this.destroySession(req, res);
     return true;
+  }
+
+  async deleteUser(req: Request, res: Response): Promise<boolean> {
+    const result = await this.userService.deleteUser(req.session.user_id || 4);
+    if (result?.id) {
+      await deleteFile(result?.avatar);
+      await this.logout(req, res);
+      return true;
+    }
+    return false;
   }
 
   testAuthGuard(): string {

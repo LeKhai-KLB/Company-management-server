@@ -1,9 +1,9 @@
 import { ObjectType, Field } from "@nestjs/graphql";
 
-@ObjectType("User")
+@ObjectType("UserInfoDto")
 export class UserInfoDto {
   @Field({ nullable: true })
-  id?: number;
+  id: number;
 
   @Field()
   email: string;
@@ -11,10 +11,10 @@ export class UserInfoDto {
   @Field()
   username: string;
 
-  @Field((type) => String, { nullable: true })
+  @Field(() => String, { nullable: true })
   avatar?: string;
 
-  @Field((type) => String, { nullable: true })
+  @Field(() => String, { nullable: true })
   introduction?: string;
 
   @Field()
