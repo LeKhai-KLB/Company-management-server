@@ -22,7 +22,6 @@ export class User extends BaseEntity {
   email: string;
 
   @Column({ type: "text", length: 30, default: "unknown" })
-  @MinLength(2)
   @MaxLength(30)
   username: string;
 
