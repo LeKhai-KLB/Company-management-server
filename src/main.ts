@@ -12,7 +12,7 @@ async function bootstrap() {
   const configService = new ConfigService();
   const logger = new Logger();
   const PORT = configService.get(CONFIG_KEY.APP_PORT);
-  const CLIENT_ORIGIN = configService.get(CONFIG_KEY.CLIENT_ORIGIN) || true;
+  // const CLIENT_ORIGIN = configService.get(CONFIG_KEY.CLIENT_ORIGIN) || true;
   const APP_SECRET_KEY = configService.get(CONFIG_KEY.APP_SECRET_KEY);
   const stage = process.env.STAGE;
 
